@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:slice_ui_chatapp_figma/screens/login_screen.dart';
+
+import '../widgets/long_button.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -9,49 +12,69 @@ class SplashScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 48.0,
+                height: 12.0,
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 48,
+                padding: EdgeInsets.only(
+                  left: 68,
                 ),
                 child: Text("Get Closer To EveryOne",
-                    style: GoogleFonts.poppins(
+                    style: TextStyle(
+                      fontFamily: GoogleFonts.poppins().fontFamily,
                       fontSize: 36,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w700,
                       wordSpacing: 1.2,
                     )),
               ),
               const SizedBox(
                 height: 12.0,
               ),
-               Padding(
-                padding: const EdgeInsets.only(left: 12),
-                child:  SizedBox(
+              Padding(
+                padding: const EdgeInsets.only(left: 36),
+                child: SizedBox(
                   width: 280,
                   child: Text(
-                    "Help you to contact everyone with just easy way",
+                    "Helps you to contact everyone with just easy way",
                     textAlign: TextAlign.left,
-                    style: GoogleFonts.poppins(
+                    style: TextStyle(
+                      fontFamily: GoogleFonts.poppins().fontFamily,
                       fontSize: 18.0,
                     ),
                   ),
                 ),
               ),
               const SizedBox(
-              height: 16.0,
+                height: 20.0,
               ),
-              Image.asset(
-              "assets/images/Dayflow Best Friday.png",
-              width: 64.0,
-              height: 64.0,
-              fit: BoxFit.fill,
+              Center(
+                child: Image.asset(
+                  "assets/images/Dayflow Best Friends.png",
+                  width: 320,
+                  height: 350,
+                  fit: BoxFit.fill,
+                ),
               ),
+              const SizedBox(
+                height: 40.0,
+              ),
+              LongButton(
+                buttonText: "Get Started",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: ((_) {
+                        return const LoginScreen();
+                      }),
+                    ),
+                  );
+                },
+              )
             ],
           ),
         ),
