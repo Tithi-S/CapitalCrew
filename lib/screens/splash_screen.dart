@@ -17,10 +17,10 @@ class SplashScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 12.0,
+                height: 16.0,
               ),
               Padding(
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   left: 68,
                 ),
                 child: Text("Get Closer To EveryOne",
@@ -32,7 +32,7 @@ class SplashScreen extends StatelessWidget {
                     )),
               ),
               const SizedBox(
-                height: 12.0,
+                height: 16.0,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 36),
@@ -49,7 +49,7 @@ class SplashScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 20.0,
+                height: 24.0,
               ),
               Center(
                 child: Image.asset(
