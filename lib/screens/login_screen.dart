@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:slice_ui_chatapp_figma/screens/chats_screen.dart';
+import 'package:slice_ui_chatapp_figma/screens/home_screen.dart';
 import 'package:slice_ui_chatapp_figma/widgets/long_button.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -41,7 +43,7 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(
-                  height: 40.0,
+                  height: 32.0,
                 ),
                 const Text(
                   "Hello, Welcome Back",
@@ -60,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 32.0,
+                  height: 28.0,
                 ),
                 const Padding(
                   padding: EdgeInsets.only(left: 20),
@@ -94,7 +96,7 @@ class LoginScreen extends StatelessWidget {
                   onChanged: (value) {},
                 ),
                 const SizedBox(
-                  height: 32.0,
+                  height: 24.0,
                 ),
                 const Padding(
                   padding: EdgeInsets.only(left: 20),
@@ -142,11 +144,15 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 32,
                 ),
-                LongButton(onTap: () {}, buttonText: "Login"),
+                LongButton(
+                    onTap: () {
+                      Navigator.pushReplacement(context, result: const HomeScreen(),MaterialPageRoute(builder: (context) => const HomeScreen(),));
+                    },
+                    buttonText: "Login"),
                 const SizedBox(
-                  height: 20.0,
+                  height: 16.0,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -171,6 +177,41 @@ class LoginScreen extends StatelessWidget {
                       width: 100,
                     ),
                   ],
+                ),
+                const SizedBox(
+                  height: 12.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      "assets/icons/GoogleLogo.png",
+                      width: 24.0,
+                      height: 24.0,
+                      fit: BoxFit.fill,
+                    ),
+                    const SizedBox(
+                      width: 32.0,
+                    ),
+                    Image.asset(
+                      "assets/icons/AppleLogo.png",
+                      width: 22.0,
+                      height: 24.0,
+                      fit: BoxFit.fill,
+                    ),
+                    const SizedBox(
+                      width: 32.0,
+                    ),
+                    Image.asset(
+                      "assets/icons/FacebookLogo.png",
+                      width: 24.0,
+                      height: 24.0,
+                      fit: BoxFit.fill,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20.0,
                 ),
               ],
             ),

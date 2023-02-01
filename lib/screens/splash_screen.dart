@@ -32,17 +32,17 @@ class SplashScreen extends StatelessWidget {
                     )),
               ),
               const SizedBox(
-                height: 16.0,
+                height: 8.0,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 36),
+              const Padding(
+                padding: EdgeInsets.only(left: 36),
                 child: SizedBox(
                   width: 280,
                   child: Text(
                     "Helps you to contact everyone with just easy way",
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      fontFamily: GoogleFonts.poppins().fontFamily,
+                      // fontFamily: ,
                       fontSize: 18.0,
                     ),
                   ),
@@ -54,13 +54,13 @@ class SplashScreen extends StatelessWidget {
               Center(
                 child: Image.asset(
                   "assets/images/Dayflow Best Friends.png",
-                  width: 320,
-                  height: 350,
+                  width: 316,
+                  height: 340,
                   fit: BoxFit.fill,
                 ),
               ),
               const SizedBox(
-                height: 40.0,
+                height: 28.0,
               ),
               LongButton(
                 buttonText: "Get Started",
