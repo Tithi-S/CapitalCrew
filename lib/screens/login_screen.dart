@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:slice_ui_chatapp_figma/screens/chats_screen.dart';
-import 'package:slice_ui_chatapp_figma/screens/home_screen.dart';
-import 'package:slice_ui_chatapp_figma/widgets/long_button.dart';
+
+import '../widgets/long_button.dart';
+import 'home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

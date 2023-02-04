@@ -1,76 +1,72 @@
-// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
-
 import 'package:flutter/material.dart';
+import 'package:slice_ui_chatapp_figma/models/contact_model.dart';
 
-class ChatsScreen extends StatefulWidget {
-  const ChatsScreen({Key? key}) : super(key: key);
+class ChatScreen extends StatelessWidget {
+  const ChatScreen({super.key});
 
-  @override
-  State<ChatsScreen> createState() => _ChatsScreenState();
-}
-
-class _ChatsScreenState extends State<ChatsScreen> {
-  List<Widget> tabsScreen = [
-    const Center(
-      child: Text(
-        "Chats Screen",
-        style: TextStyle(
-          fontSize: 28.0,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
-    const Center(
-      child: Text(
-        "Friends Screen",
-        style: TextStyle(
-          fontSize: 28.0,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
-    const Center(
-      child: Text(
-        "Calls Screen",
-        style: TextStyle(
-          fontSize: 28.0,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
-  ];
-  int tabIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: SafeArea(
-        child: Scaffold(
-            appBar: TabBar(
-              onTap: (value) {
-                tabIndex = value;
-                setState(() {
-                  
-                });
-              },
-              tabs:const [
-                Tab(
-                  text: "Chats",
-                ),
-                Tab(
-                  text: "Friends",
-                ),
-                Tab(
-                  text: "Calls",
-                ),
-              ],
-              
-              labelColor: Colors.purple,
-              indicatorColor:  Colors.purple,
-
+    return ListView.builder(
+      itemCount: contactsList.length,
+      itemBuilder: (context, index) {
+        var contact = contactsList[index];
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.purple,
+              ),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(12.0),
+              ),
             ),
-            body: tabsScreen[tabIndex]),
-      ),
+            child: ListTile(
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              horizontalTitleGap: 12,
+              leading: CircleAvatar(radius: 28,
+                backgroundImage: AssetImage(contact.imageUrl),
+              ),
+              title: Text(
+                contact.contactName,
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              subtitle: Row(
+                children: [
+                  const Icon(
+                    Icons.access_time_outlined,
+                    size: 16,
+                    color: Colors.green,
+                  ),
+                  const SizedBox(
+                    width: 4.0,
+                  ),
+                  Text(
+                    contact.newChat,
+                    style: const TextStyle(
+                      fontSize: 12.0,
+                    ),
+                  ),
+                ],
+              ),
+              trailing: Padding(
+                padding: const EdgeInsets.only(bottom: 20, right: 4),
+                child: Text(
+                  contact.time,
+                  style: const TextStyle(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w200,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
