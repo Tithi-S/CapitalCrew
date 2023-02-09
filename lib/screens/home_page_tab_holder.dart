@@ -1,8 +1,8 @@
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'chats_screen.dart';
-
 
 class HomePageTabHolder extends StatefulWidget {
   const HomePageTabHolder({Key? key}) : super(key: key);
@@ -42,7 +42,7 @@ class _HomePageTabHolderState extends State<HomePageTabHolder> {
         child: Scaffold(
             appBar: PreferredSize(
                 preferredSize:
-                    Size.fromHeight(AppBar().preferredSize.height * 1.74),
+                    Size.fromHeight(AppBar().preferredSize.height * 1.9),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -55,12 +55,13 @@ class _HomePageTabHolderState extends State<HomePageTabHolder> {
                         SizedBox(
                           height: Size.fromHeight(AppBar().preferredSize.height)
                                   .height *
-                              0.52,
+                              0.64,
                           width: MediaQuery.of(context).size.width * 0.65,
                           child: TextFormField(
+                            cursorColor: Colors.grey,
                             decoration: InputDecoration(
-                              prefixIcon: const Icon(Icons.search),
-                              prefixIconColor: Colors.black,
+                              prefixIcon: const Icon(IconlyLight.search),
+                              prefixIconColor: Colors.black54,
                               filled: true,
                               fillColor: Colors.grey.withOpacity(0.4),
                               enabledBorder: const OutlineInputBorder(
@@ -96,12 +97,15 @@ class _HomePageTabHolderState extends State<HomePageTabHolder> {
                           ),
                           child: const Center(
                             child: Icon(
-                              Icons.qr_code_scanner_rounded,
+                              IconlyLight.scan,
                               color: Colors.black54,
+                              weight: 900,
+                              size: 24,
                             ),
                           ),
-                        ),const SizedBox(
-                        width: 36.0,
+                        ),
+                        const SizedBox(
+                          width: 36.0,
                         ),
                       ],
                     ),

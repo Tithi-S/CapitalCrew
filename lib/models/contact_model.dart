@@ -2,7 +2,7 @@
 class Contact {
   final String imageUrl;
   final String contactName;
-   String newChat;
+  String newChat;
   final String time;
   List chatList;
   Contact({
@@ -17,16 +17,16 @@ class Contact {
 String imageDir = "assets/images";
 List<Contact> contactsList = [
   Contact(
-    chatList : [
+    chatList: [
       ["I'm waiting Bro", false],
       ["Kok lama bangettt", false],
       ["Iya bro bentar, lagi nonton sepak bola", true],
-      ["Alaahh TAILAH, capek nunggu",false],
-      ["Sabar Broooo, lagi dikit niii",true],
-      ["Sini aja dulu ke rumah gw",true],
-      ["Yaudah lah ,otw",false],
-      ["Nitip gorengan 5rb",true],
-      ["wah kek babi kauu, okelah",false],
+      ["Alaahh TAILAH, capek nunggu", false],
+      ["Sabar Broooo, lagi dikit niii", true],
+      ["Sini aja dulu ke rumah gw", true],
+      ["Yaudah lah ,otw", false],
+      ["Nitip gorengan 5rb", true],
+      ["wah kek babi kauu, okelah", false],
     ],
     imageUrl: "$imageDir/thor_pp.jpg",
     contactName: "Thor Odinson",
@@ -34,16 +34,16 @@ List<Contact> contactsList = [
     time: "15.43",
   ),
   Contact(
-    chatList : [
+    chatList: [
       ["I'm waiting Bro", false],
       ["Kok lama bangettt", false],
       ["Iya bro bentar, lagi nonton sepak bola", true],
-      ["Alaahh TAILAH, capek nunggu",false],
-      ["Sabar Broooo, lagi dikit niii",true],
-      ["Sini aja dulu ke rumah gw",true],
-      ["Yaudah lah ,otw",false],
-      ["Nitip gorengan 5rb",true],
-      ["wah kek babi kauu, okelah",false],
+      ["Alaahh TAILAH, capek nunggu", false],
+      ["Sabar Broooo, lagi dikit niii", true],
+      ["Sini aja dulu ke rumah gw", true],
+      ["Yaudah lah ,otw", false],
+      ["Nitip gorengan 5rb", true],
+      ["wah kek babi kauu, okelah", false],
     ],
     imageUrl: "$imageDir/stave_roger.jpg",
     contactName: "Steve Roger",
@@ -51,16 +51,16 @@ List<Contact> contactsList = [
     time: "15.29",
   ),
   Contact(
-    chatList : [
+    chatList: [
       ["I'm waiting Bro", false],
       ["Kok lama bangettt", false],
       ["Iya bro bentar, lagi nonton sepak bola", true],
-      ["Alaahh TAILAH, capek nunggu",false],
-      ["Sabar Broooo, lagi dikit niii",true],
-      ["Sini aja dulu ke rumah gw",true],
-      ["Yaudah lah ,otw",false],
-      ["Nitip gorengan 5rb",true],
-      ["wah kek babi kauu, okelah",false],
+      ["Alaahh TAILAH, capek nunggu", false],
+      ["Sabar Broooo, lagi dikit niii", true],
+      ["Sini aja dulu ke rumah gw", true],
+      ["Yaudah lah ,otw", false],
+      ["Nitip gorengan 5rb", true],
+      ["wah kek babi kauu, okelah", false],
     ],
     imageUrl: "$imageDir/buzz_lightyear.jpg",
     contactName: "Buzz Lightyear",
@@ -68,16 +68,16 @@ List<Contact> contactsList = [
     time: "14.53",
   ),
   Contact(
-    chatList : [
+    chatList: [
       ["I'm waiting Bro", false],
       ["Kok lama bangettt", false],
       ["Iya bro bentar, lagi nonton sepak bola", true],
-      ["Alaahh TAILAH, capek nunggu",false],
-      ["Sabar Broooo, lagi dikit niii",true],
-      ["Sini aja dulu ke rumah gw",true],
-      ["Yaudah lah ,otw",false],
-      ["Nitip gorengan 5rb",true],
-      ["wah kek babi kauu, okelah",false],
+      ["Alaahh TAILAH, capek nunggu", false],
+      ["Sabar Broooo, lagi dikit niii", true],
+      ["Sini aja dulu ke rumah gw", true],
+      ["Yaudah lah ,otw", false],
+      ["Nitip gorengan 5rb", true],
+      ["wah kek babi kauu, okelah", false],
     ],
     imageUrl: "$imageDir/daniel-lincoln.jpg",
     contactName: "Juragan Bakso",
@@ -85,16 +85,16 @@ List<Contact> contactsList = [
     time: "12.27",
   ),
   Contact(
-    chatList : [
+    chatList: [
       ["I'm waiting Bro", false],
       ["Kok lama bangettt", false],
       ["Iya bro bentar, lagi nonton sepak bola", true],
-      ["Alaahh TAILAH, capek nunggu",false],
-      ["Sabar Broooo, lagi dikit niii",true],
-      ["Sini aja dulu ke rumah gw",true],
-      ["Yaudah lah ,otw",false],
-      ["Nitip gorengan 5rb",true],
-      ["wah kek babi kauu, okelah",false],
+      ["Alaahh TAILAH, capek nunggu", false],
+      ["Sabar Broooo, lagi dikit niii", true],
+      ["Sini aja dulu ke rumah gw", true],
+      ["Yaudah lah ,otw", false],
+      ["Nitip gorengan 5rb", true],
+      ["wah kek babi kauu, okelah", false],
     ],
     imageUrl: "$imageDir/ransford-quaye.jpg",
     contactName: "Orang Keren",
@@ -102,16 +102,16 @@ List<Contact> contactsList = [
     time: "12.30",
   ),
   Contact(
-    chatList : [
+    chatList: [
       ["I'm waiting Bro", false],
       ["Kok lama bangettt", false],
       ["Iya bro bentar, lagi nonton sepak bola", true],
-      ["Alaahh TAILAH, capek nunggu",false],
-      ["Sabar Broooo, lagi dikit niii",true],
-      ["Sini aja dulu ke rumah gw",true],
-      ["Yaudah lah ,otw",false],
-      ["Nitip gorengan 5rb",true],
-      ["wah kek babi kauu, okelah",false],
+      ["Alaahh TAILAH, capek nunggu", false],
+      ["Sabar Broooo, lagi dikit niii", true],
+      ["Sini aja dulu ke rumah gw", true],
+      ["Yaudah lah ,otw", false],
+      ["Nitip gorengan 5rb", true],
+      ["wah kek babi kauu, okelah", false],
     ],
     imageUrl: "$imageDir/aiony-haust.jpg",
     contactName: "Mbak Sukijem",

@@ -1,16 +1,9 @@
-# slice_ui_chatapp_figma
+# Slicing Figma UI design into Flutter code
 
-A new Flutter project.
+A Chat App UI design, i got it from Figma Community and convert the design into Flutter code.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+### This App has several display screens as shown below:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<div align= "center"><img alt="Splash Screen image" src="assets\readme_images\splash_screen.png" width ="25%" style="padding: 10px" >   <img alt="Login Screen image" src="assets\readme_images\login_screen.png" width ="25%" style="padding: 10px"> </div>
+<div align= "center"><img alt="Home Screen image" src="assets\readme_images\home_screen.png" width ="25%" style="padding: 20px" >   <img alt="image of Chat Screen " src="assets\readme_images\chat_screen.png" width ="25%" style="padding: 20px" > </div>

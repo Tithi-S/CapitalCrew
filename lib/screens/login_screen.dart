@@ -148,7 +148,12 @@ class LoginScreen extends StatelessWidget {
                 ),
                 LongButton(
                     onTap: () {
-                      Navigator.pushReplacement(context, result: const HomeScreen(),MaterialPageRoute(builder: (context) => const HomeScreen(),));
+                      Navigator.pushReplacement(
+                          context,
+                          result: const HomeScreen(),
+                          MaterialPageRoute(
+                            builder: (context) => const HomeScreen(),
+                          ));
                     },
                     buttonText: "Login"),
                 const SizedBox(

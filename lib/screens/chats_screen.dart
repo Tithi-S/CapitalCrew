@@ -22,8 +22,8 @@ class ChatScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ConversationScreen(
-                      chatCount: contact.chatList.length,
                         imageUrl: contact.imageUrl,
+                        chatList: contact.chatList,
                         contactName: contact.contactName),
                   ));
             },

@@ -2,20 +2,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
-import 'package:slice_ui_chatapp_figma/models/contact_model.dart';
-import 'package:slice_ui_chatapp_figma/screens/bubbles_chat.dart';
+import 'package:slice_ui_chatapp_figma/widgets/bubbles_chat.dart';
 
 class ConversationScreen extends StatelessWidget {
   const ConversationScreen({
     Key? key,
     required this.imageUrl,
     required this.contactName,
-    required this.chatCount,
+    required this.chatList,
   }) : super(key: key);
 
   final String imageUrl;
   final String contactName;
-  final int chatCount;
+
+  final List chatList;
 
   @override
   Widget build(BuildContext context) {
@@ -55,14 +55,12 @@ class ConversationScreen extends StatelessWidget {
               IconButton(
                 onPressed: () {},
                 icon: const Icon(
-                  Icons.phone_outlined,
+                  IconlyLight.call,
                 ),
               ),
               IconButton(
                 onPressed: () {},
-                icon: const Icon(
-                  Icons.videocam_outlined,
-                ),
+                icon: const Icon(IconlyLight.video),
               ),
               const SizedBox(
                 width: 12.0,
@@ -71,78 +69,84 @@ class ConversationScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView.builder(
-        itemCount: chatCount,
-        itemBuilder: (context, index) {
-          var chat = contactsList[index].chatList[index];
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: MyChatBubble(text: chat[0], isSender: chat[1]),
-          );
-        },
-      ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.all(8),
-        margin: MediaQuery.of(context).viewInsets,
-        height: 100,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 8,
-              color: Colors.grey,
-            )
-          ],
-          color: Colors.grey[100],
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(36.0),
-            topRight: Radius.circular(36.0),
-          ),
+      body: SafeArea(
+        child: ListView.separated(
+          separatorBuilder: (context, index) {
+            return const SizedBox(
+              height: 20,
+            );
+          },
+          itemCount: chatList.length,
+          itemBuilder: (context, index) {
+            var chat = chatList[index];
+            return MyChatBubble(text: chat[0], isSender: chat[1]);
+          },
         ),
-        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          const SizedBox(
-            width: 12.0,
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          margin: MediaQuery.of(context).viewInsets,
+          height: 100,
+          decoration: BoxDecoration(
+            boxShadow: const [
+              BoxShadow(
+                blurRadius: 8,
+                color: Colors.grey,
+              )
+            ],
+            color: Colors.grey[100],
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(36.0),
+              topRight: Radius.circular(36.0),
+            ),
           ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.44,
-            // height: 32,
-            child: TextFormField(
-              cursorColor: Colors.black,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                hintText: "Type here...",
-                hintStyle: TextStyle(
-                  color: Colors.black87,
+          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            const SizedBox(
+              width: 12.0,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.44,
+              // height: 32,
+              child: TextFormField(
+                cursorColor: Colors.black,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Type here...",
+                  hintStyle: TextStyle(
+                    color: Colors.black87,
+                  ),
                 ),
               ),
             ),
-          ),
-          IconButton(
-            padding: const EdgeInsets.all(0),
-            onPressed: () {},
-            icon: const Icon(
-              IconlyLight.camera,
-              size: 32.0,
+            IconButton(
+              padding: const EdgeInsets.all(0),
+              onPressed: () {},
+              icon: const Icon(
+                IconlyLight.camera,
+                size: 32.0,
+              ),
             ),
-          ),
-          IconButton(
-            padding: const EdgeInsets.all(0),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              IconlyLight.moreSquare,
-              size: 32.0,
+            IconButton(
+              padding: const EdgeInsets.all(0),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                IconlyLight.moreSquare,
+                size: 32.0,
+              ),
             ),
-          ),
-          IconButton(
-            padding: const EdgeInsets.all(0),
-            onPressed: () {},
-            icon: const Icon(
-              IconlyLight.voice,
-              size: 32.0,
+            IconButton(
+              padding: const EdgeInsets.all(0),
+              onPressed: () {},
+              icon: const Icon(
+                IconlyLight.voice,
+                size: 32.0,
+              ),
             ),
-          ),
-        ]),
+          ]),
+        ),
       ),
     );
   }

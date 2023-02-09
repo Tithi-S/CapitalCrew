@@ -8,11 +8,12 @@ class MyChatBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BubbleSpecialThree(
-      
       text: text,
       tail: false,
       isSender: isSender,
-      color: isSender ?  Colors.white:  Colors.purple,
+      color: isSender ? Colors.grey[300]! : Colors.purple[400]!,
+
+      // delivered: true,
     );
   }
 }

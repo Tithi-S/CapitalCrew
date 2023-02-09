@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:slice_ui_chatapp_figma/screens/conversation_screen.dart';
 
-import 'models/contact_model.dart';
 import 'screens/splash_screen.dart';
 
 void main() {

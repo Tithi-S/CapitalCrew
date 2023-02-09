@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 
 import 'home_page_tab_holder.dart';
 
@@ -36,13 +37,20 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         iconSize: 28,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.house_outlined), label: ''),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person_add_alt_1_outlined), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: ''),
+              icon: Icon(IconlyLight.home),
+              label: '',
+              activeIcon: Icon(IconlyBold.home)),
+          BottomNavigationBarItem(
+              icon: Icon(IconlyLight.addUser),
+              label: '',
+              activeIcon: Icon(IconlyBold.addUser)),
+          BottomNavigationBarItem(
+              icon: Icon(IconlyLight.setting),
+              label: '',
+              activeIcon: Icon(IconlyBold.setting)),
         ],
         onTap: (value) {
-          print(value);
           setState(() {
             sIndex = value;
           });
