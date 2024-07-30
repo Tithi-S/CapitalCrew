@@ -23,7 +23,7 @@ class SplashScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                  horizontal: 120,vertical: 60,
                 ),
-                child: Text("Finance",
+                child: Text("Capital Crews",
                     style: TextStyle(
                       fontFamily: GoogleFonts.poppins().fontFamily,
                       fontSize: 36,
@@ -53,7 +53,7 @@ class SplashScreen extends StatelessWidget {
               ),
               Center(
                 child: Image.asset(
-                  "assets/images/Dayflow Best Friends.png",
+                  "assets/images/spash.jpg",
                   width: 316,
                   height: 340,
                   fit: BoxFit.fill,

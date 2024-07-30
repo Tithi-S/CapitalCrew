@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
 import 'home_page_tab_holder.dart';
+import 'educationtab.dart'; // Import the EducationTab widget
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,9 +14,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List screens = [
+  List<Widget> screens = [
     const HomePageTabHolder(),
-    AlertDialog(content: Container(color: Colors.blue, height: 60, width: 70)),
+    const EducationTab(), // Add the EducationTab widget here
     const Center(
       child: Text(
         "Profile Page",

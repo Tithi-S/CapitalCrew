@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'joinnewgrp.dart';
 import 'chats_screen.dart';
 
 class HomePageTabHolder extends StatefulWidget {
@@ -12,106 +13,95 @@ class HomePageTabHolder extends StatefulWidget {
 }
 
 class _HomePageTabHolderState extends State<HomePageTabHolder> {
-  List<Widget> tabsScreen = [
-    const ChatScreen(),
-    const Center(
-      child: Text(
-        "Screen",
-        style: TextStyle(
-          fontSize: 28.0,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
-    const Center(
-      child: Text(
-        "Calls Screen",
-        style: TextStyle(
-          fontSize: 28.0,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
-  ];
   int tabIndex = 0;
+  String selectedFilter = 'All';
+
+  final List<String> filterOptions = [
+    'All',
+    'Stocks',
+    'Equity',
+    'Mutual Funds',
+    'Debt Funds',
+    'ETFs',
+    'RD'
+  ];
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: SafeArea(
-        child: Scaffold(
-            appBar: PreferredSize(
-                preferredSize:
-                    Size.fromHeight(AppBar().preferredSize.height * 1.9),
+      child: Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: [
+              PreferredSize(
+                preferredSize: Size.fromHeight(kToolbarHeight + 100), // Adjust height as needed
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
                       height: 20.0,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: Size.fromHeight(AppBar().preferredSize.height)
-                                  .height *
-                              0.64,
-                          width: MediaQuery.of(context).size.width * 0.65,
-                          child: TextFormField(
-                            cursorColor: Colors.grey,
-                            decoration: InputDecoration(
-                              prefixIcon: const Icon(IconlyLight.search),
-                              prefixIconColor: Colors.black54,
-                              filled: true,
-                              fillColor: Colors.grey.withOpacity(0.4),
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0), // Add padding to the sides
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 8.0), // Padding between search bar and filter
+                              child: TextFormField(
+                                cursorColor: Colors.grey,
+                                decoration: InputDecoration(
+                                  prefixIcon: const Icon(IconlyLight.search),
+                                  prefixIconColor: Colors.black54,
+                                  filled: true,
+                                  fillColor: Colors.grey.withOpacity(0.4),
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                    ),
+                                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                                  ),
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                                    borderSide: BorderSide(
+                                      width: 2,
+                                      color: Colors.purple,
+                                    ),
+                                  ),
                                 ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
-                              ),
-                              focusedBorder: const OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
-                                borderSide: BorderSide(
-                                  width: 2,
-                                  color: Colors.purple,
-                                ),
+                                onChanged: (value) {},
                               ),
                             ),
-                            onChanged: (value) {},
                           ),
-                        ),
-                        const SizedBox(
-                          width: 8.0,
-                        ),
-                        Container(
-                          height: 28,
-                          width: 28,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.withOpacity(0.4),
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(4.0),
+                          DropdownButton<String>(
+                            value: selectedFilter,
+                            icon: const Icon(IconlyLight.filter),
+                            elevation: 16,
+                            style: const TextStyle(color: Colors.purple),
+                            underline: Container(
+                              height: 2,
+                              color: Colors.purple,
                             ),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                selectedFilter = newValue!;
+                              });
+                            },
+                            items: filterOptions
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
                           ),
-                          child: const Center(
-                            child: Icon(
-                              IconlyLight.scan,
-                              color: Colors.black54,
-                              weight: 900,
-                              size: 24,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 36.0,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                    // const SizedBox(
-                    //   height: 8.0,
-                    // ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
                     TabBar(
                       onTap: (value) {
                         tabIndex = value;
@@ -124,16 +114,44 @@ class _HomePageTabHolderState extends State<HomePageTabHolder> {
                         Tab(
                           text: "Join new group",
                         ),
-                        // Tab(
-                        //   text: "Calls",
-                        // ),
                       ],
                       labelColor: Colors.purple,
                       indicatorColor: Colors.purple,
                     ),
                   ],
-                )),
-            body: tabsScreen[tabIndex]),
+                ),
+              ),
+              Expanded(
+                child: Stack(
+                  children: [
+                    TabBarView(
+                      children: [
+                        const ChatScreen(displayContactsCount: 2), // Your Investment Groups
+                        const JoinNewGroupTab(), // Join New Group
+                      ],
+                    ),
+                    if (tabIndex == 1)
+                      Positioned(
+                        bottom: 16.0,
+                        right: 16.0,
+                        child: FloatingActionButton.extended(
+                          onPressed: () {
+                            // Handle create new community action
+                          },
+                          icon: const Icon(Icons.add, color: Colors.white),
+                          label: const Text(
+                            'Create New Community',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: Colors.purple,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

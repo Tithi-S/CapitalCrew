@@ -20,88 +20,142 @@ class ConversationScreen extends StatefulWidget {
 class _ConversationScreenState extends State<ConversationScreen> {
   bool isExpanded = false;
 
+  void _showPopupMenu() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: Icon(Icons.poll),
+              title: Text('Create Poll'),
+              onTap: () {
+                // Add your poll creation logic here
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(isExpanded ? 150 : 92),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: AppBar(
-            leadingWidth: 40,
-            shape: const ContinuousRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(48.0),
-                bottomRight: Radius.circular(48.0),
-              ),
-            ),
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
+        children: [
+          SafeArea(
+            child: Column(
               children: [
-                Text(
-                  widget.contactName,
-                  overflow: TextOverflow.fade,
-                  style: Theme.of(context).appBarTheme.titleTextStyle,
-                ),
-                if (isExpanded)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          "No of people: 10",
-                          style: TextStyle(
-                            color: Colors.purple,
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w300,
+                PreferredSize(
+                  preferredSize: const Size.fromHeight(92),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: AppBar(
+                      leadingWidth: 40,
+                      shape: const ContinuousRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(48.0),
+                          bottomRight: Radius.circular(48.0),
+                        ),
+                      ),
+                      title: Text(
+                        widget.contactName,
+                        overflow: TextOverflow.fade,
+                        style: Theme.of(context).appBarTheme.titleTextStyle,
+                      ),
+                      actions: [
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isExpanded = !isExpanded;
+                            });
+                          },
+                          icon: Icon(
+                            isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
                           ),
                         ),
-                        SizedBox(height: 4),
-                        Text(
-                          "Tags: stocks, bonds, ETFs",
-                          style: TextStyle(
-                            color: Colors.purple,
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w300,
-                          ),
+                        const SizedBox(
+                          width: 12.0,
                         ),
                       ],
                     ),
                   ),
+                ),
+                Expanded(
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(
+                        height: 20,
+                      );
+                    },
+                    itemCount: widget.chatList.length,
+                    itemBuilder: (context, index) {
+                      var chat = widget.chatList[index];
+                      return MyChatBubble(text: chat[0], isSender: chat[1]);
+                    },
+                  ),
+                ),
               ],
             ),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    isExpanded = !isExpanded;
-                  });
-                },
-                icon: Icon(
-                  isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
-                ),
-              ),
-              const SizedBox(
-                width: 12.0,
-              ),
-            ],
           ),
-        ),
-      ),
-      body: SafeArea(
-        child: ListView.separated(
-          separatorBuilder: (context, index) {
-            return const SizedBox(
-              height: 20,
-            );
-          },
-          itemCount: widget.chatList.length,
-          itemBuilder: (context, index) {
-            var chat = widget.chatList[index];
-            return MyChatBubble(text: chat[0], isSender: chat[1]);
-          },
-        ),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 300),
+            top: isExpanded ? 92 : -150,
+            left: 0,
+            right: 0,
+            child: Container(
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 10.0,
+                    spreadRadius: 5.0,
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "No of people: 10",
+                    style: TextStyle(
+                      color: Colors.purple,
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Wrap(
+                    spacing: 8.0,
+                    children: [
+                      Chip(
+                        label: Text("stocks"),
+                        backgroundColor: Colors.purple.withOpacity(0.1),
+                        labelStyle: TextStyle(color: Colors.purple),
+                      ),
+                      Chip(
+                        label: Text("bonds"),
+                        backgroundColor: Colors.purple.withOpacity(0.1),
+                        labelStyle: TextStyle(color: Colors.purple),
+                      ),
+                      Chip(
+                        label: Text("ETFs"),
+                        backgroundColor: Colors.purple.withOpacity(0.1),
+                        labelStyle: TextStyle(color: Colors.purple),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomAppBar(
         child: Container(
@@ -128,7 +182,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                 width: 12.0,
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.44,
+                width: MediaQuery.of(context).size.width * 0.66,
                 child: TextFormField(
                   cursorColor: Colors.black,
                   decoration: const InputDecoration(
@@ -142,27 +196,9 @@ class _ConversationScreenState extends State<ConversationScreen> {
               ),
               IconButton(
                 padding: const EdgeInsets.all(0),
-                onPressed: () {},
-                icon: const Icon(
-                  IconlyLight.camera,
-                  size: 32.0,
-                ),
-              ),
-              IconButton(
-                padding: const EdgeInsets.all(0),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+                onPressed: _showPopupMenu,
                 icon: const Icon(
                   IconlyLight.moreSquare,
-                  size: 32.0,
-                ),
-              ),
-              IconButton(
-                padding: const EdgeInsets.all(0),
-                onPressed: () {},
-                icon: const Icon(
-                  IconlyLight.voice,
                   size: 32.0,
                 ),
               ),

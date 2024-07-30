@@ -2,19 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:slice_ui_chatapp_figma/models/contact_model.dart';
 import 'package:slice_ui_chatapp_figma/screens/conversation_screen.dart';
 
-class ChatScreen extends StatelessWidget {
-  final int displayContactsCount;
-
-  const ChatScreen({super.key, required this.displayContactsCount});
+class JoinNewGroupTab extends StatelessWidget {
+  const JoinNewGroupTab({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<Contact> contactsToDisplay = contactsList.take(displayContactsCount).toList();
+    List<Contact> remainingContacts = contactsList.skip(2).toList();
 
     return ListView.builder(
-      itemCount: contactsToDisplay.length,
+      itemCount: remainingContacts.length,
       itemBuilder: (context, index) {
-        var contact = contactsToDisplay[index];
+        var contact = remainingContacts[index];
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           child: InkWell(

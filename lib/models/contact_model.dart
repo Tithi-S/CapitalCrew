@@ -2,15 +2,18 @@
 class Contact {
   final String imageUrl;
   final String contactName;
-  String newChat;
   final String time;
   List chatList;
+  String tag1; // Added tag1 field
+  String tag2; // Added tag2 field
+  
   Contact({
     required this.imageUrl,
     required this.contactName,
-    required this.newChat,
     required this.time,
     required this.chatList,
+    this.tag1 = '', // Default empty string if not provided
+    this.tag2 = '', // Default empty string if not provided
   });
 }
 
@@ -30,8 +33,9 @@ List<Contact> contactsList = [
     ],
     imageUrl: "$imageDir/finance_chart.png",
     contactName: "Global Investment Group",
-    newChat: "Quarterly performance review?",
     time: "15.43",
+    tag1: "equity", // Added tag1
+    tag2: "etfs", // Added tag2
   ),
   Contact(
     chatList: [
@@ -47,8 +51,9 @@ List<Contact> contactsList = [
     ],
     imageUrl: "$imageDir/portfolio.png",
     contactName: "Capital Growth Network",
-    newChat: "Strategy meeting tomorrow!",
     time: "15.29",
+    tag1: "bonds", // Added tag1
+    tag2: "mutual fund", // Added tag2
   ),
   Contact(
     chatList: [
@@ -64,8 +69,9 @@ List<Contact> contactsList = [
     ],
     imageUrl: "$imageDir/investment.png",
     contactName: "Future Wealth Club",
-    newChat: "New investment opportunity",
     time: "14.53",
+    tag1: "debt funds", // Added tag1
+    tag2: "equity", // Added tag2
   ),
   Contact(
     chatList: [
@@ -81,8 +87,9 @@ List<Contact> contactsList = [
     ],
     imageUrl: "$imageDir/stock_chart.png",
     contactName: "Investment Insight Group",
-    newChat: "Market trends report",
     time: "12.27",
+    tag1: "bonds", // Added tag1
+    tag2: "etfs", // Added tag2
   ),
   Contact(
     chatList: [
@@ -98,8 +105,9 @@ List<Contact> contactsList = [
     ],
     imageUrl: "$imageDir/real_estate.png",
     contactName: "Property Investment Network",
-    newChat: "Real estate update",
     time: "12.30",
+    tag1: "mutual fund", // Added tag1
+    tag2: "rd", // Added tag2
   ),
   Contact(
     chatList: [
@@ -115,7 +123,8 @@ List<Contact> contactsList = [
     ],
     imageUrl: "$imageDir/webinar.png",
     contactName: "Wealth Builders Forum",
-    newChat: "Investment webinar reminder",
     time: "11.40",
+    tag1: "equity", // Added tag1
+    tag2: "debt funds", // Added tag2
   ),
 ];
