@@ -1,27 +1,30 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
 import 'package:slice_ui_chatapp_figma/widgets/bubbles_chat.dart';
 
-class ConversationScreen extends StatelessWidget {
+class ConversationScreen extends StatefulWidget {
   const ConversationScreen({
     Key? key,
-    required this.imageUrl,
     required this.contactName,
     required this.chatList,
   }) : super(key: key);
 
-  final String imageUrl;
   final String contactName;
-
   final List chatList;
+
+  @override
+  _ConversationScreenState createState() => _ConversationScreenState();
+}
+
+class _ConversationScreenState extends State<ConversationScreen> {
+  bool isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(92),
+        preferredSize: Size.fromHeight(isExpanded ? 150 : 92),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: AppBar(
@@ -32,35 +35,52 @@ class ConversationScreen extends StatelessWidget {
                 bottomRight: Radius.circular(48.0),
               ),
             ),
-            title: ListTile(
-              horizontalTitleGap: 12,
-              // contentPadding: const EdgeInsets.only(left: 44),
-              title: Text(
-                contactName,
-                overflow: TextOverflow.fade,
-                style: Theme.of(context).appBarTheme.titleTextStyle,
-              ),
-              leading: CircleAvatar(
-                  backgroundImage: AssetImage(imageUrl), radius: 28),
-              subtitle: const Text(
-                "Online",
-                style: TextStyle(
-                  color: Colors.purple,
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.w300,
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.contactName,
+                  overflow: TextOverflow.fade,
+                  style: Theme.of(context).appBarTheme.titleTextStyle,
                 ),
-              ),
+                if (isExpanded)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          "No of people: 10",
+                          style: TextStyle(
+                            color: Colors.purple,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          "Tags: stocks, bonds, ETFs",
+                          style: TextStyle(
+                            color: Colors.purple,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
             ),
             actions: [
               IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  IconlyLight.call,
+                onPressed: () {
+                  setState(() {
+                    isExpanded = !isExpanded;
+                  });
+                },
+                icon: Icon(
+                  isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
                 ),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(IconlyLight.video),
               ),
               const SizedBox(
                 width: 12.0,
@@ -76,9 +96,9 @@ class ConversationScreen extends StatelessWidget {
               height: 20,
             );
           },
-          itemCount: chatList.length,
+          itemCount: widget.chatList.length,
           itemBuilder: (context, index) {
-            var chat = chatList[index];
+            var chat = widget.chatList[index];
             return MyChatBubble(text: chat[0], isSender: chat[1]);
           },
         ),
@@ -101,51 +121,53 @@ class ConversationScreen extends StatelessWidget {
               topRight: Radius.circular(36.0),
             ),
           ),
-          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            const SizedBox(
-              width: 12.0,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.44,
-              // height: 32,
-              child: TextFormField(
-                cursorColor: Colors.black,
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "Type here...",
-                  hintStyle: TextStyle(
-                    color: Colors.black87,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(
+                width: 12.0,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.44,
+                child: TextFormField(
+                  cursorColor: Colors.black,
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    hintText: "Type here...",
+                    hintStyle: TextStyle(
+                      color: Colors.black87,
+                    ),
                   ),
                 ),
               ),
-            ),
-            IconButton(
-              padding: const EdgeInsets.all(0),
-              onPressed: () {},
-              icon: const Icon(
-                IconlyLight.camera,
-                size: 32.0,
+              IconButton(
+                padding: const EdgeInsets.all(0),
+                onPressed: () {},
+                icon: const Icon(
+                  IconlyLight.camera,
+                  size: 32.0,
+                ),
               ),
-            ),
-            IconButton(
-              padding: const EdgeInsets.all(0),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                IconlyLight.moreSquare,
-                size: 32.0,
+              IconButton(
+                padding: const EdgeInsets.all(0),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  IconlyLight.moreSquare,
+                  size: 32.0,
+                ),
               ),
-            ),
-            IconButton(
-              padding: const EdgeInsets.all(0),
-              onPressed: () {},
-              icon: const Icon(
-                IconlyLight.voice,
-                size: 32.0,
+              IconButton(
+                padding: const EdgeInsets.all(0),
+                onPressed: () {},
+                icon: const Icon(
+                  IconlyLight.voice,
+                  size: 32.0,
+                ),
               ),
-            ),
-          ]),
+            ],
+          ),
         ),
       ),
     );

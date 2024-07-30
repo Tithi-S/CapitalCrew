@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
     AlertDialog(content: Container(color: Colors.blue, height: 60, width: 70)),
     const Center(
       child: Text(
-        "Settings screen",
+        "Profile Page",
         style: TextStyle(
           fontSize: 24.0,
           fontWeight: FontWeight.bold,
@@ -38,17 +38,17 @@ class _HomeScreenState extends State<HomeScreen> {
         iconSize: 28,
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(IconlyLight.home),
+              icon: Icon(IconlyLight.user3),
               label: '',
-              activeIcon: Icon(IconlyBold.home)),
+              activeIcon: Icon(IconlyBold.user3)),
           BottomNavigationBarItem(
-              icon: Icon(IconlyLight.addUser),
+              icon: Icon(IconlyLight.bookmark),
               label: '',
-              activeIcon: Icon(IconlyBold.addUser)),
+              activeIcon: Icon(IconlyBold.bookmark)),
           BottomNavigationBarItem(
-              icon: Icon(IconlyLight.setting),
+              icon: Icon(IconlyLight.profile),
               label: '',
-              activeIcon: Icon(IconlyBold.setting)),
+              activeIcon: Icon(IconlyBold.profile)),
         ],
         onTap: (value) {
           setState(() {

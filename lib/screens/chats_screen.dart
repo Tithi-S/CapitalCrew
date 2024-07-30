@@ -22,7 +22,7 @@ class ChatScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ConversationScreen(
-                        imageUrl: contact.imageUrl,
+                        //imageUrl: contact.imageUrl,
                         chatList: contact.chatList,
                         contactName: contact.contactName),
                   ));
@@ -38,10 +38,6 @@ class ChatScreen extends StatelessWidget {
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 horizontalTitleGap: 12,
-                leading: CircleAvatar(
-                  radius: 28,
-                  backgroundImage: AssetImage(contact.imageUrl),
-                ),
                 title: Text(
                   contact.contactName,
                   style: const TextStyle(

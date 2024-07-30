@@ -16,7 +16,7 @@ class _HomePageTabHolderState extends State<HomePageTabHolder> {
     const ChatScreen(),
     const Center(
       child: Text(
-        "Friends Screen",
+        "Screen",
         style: TextStyle(
           fontSize: 28.0,
           fontWeight: FontWeight.bold,
@@ -37,7 +37,7 @@ class _HomePageTabHolderState extends State<HomePageTabHolder> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: SafeArea(
         child: Scaffold(
             appBar: PreferredSize(
@@ -119,14 +119,14 @@ class _HomePageTabHolderState extends State<HomePageTabHolder> {
                       },
                       tabs: const [
                         Tab(
-                          text: "Chats",
+                          text: "Your Investment Groups",
                         ),
                         Tab(
-                          text: "Friends",
+                          text: "Join new group",
                         ),
-                        Tab(
-                          text: "Calls",
-                        ),
+                        // Tab(
+                        //   text: "Calls",
+                        // ),
                       ],
                       labelColor: Colors.purple,
                       indicatorColor: Colors.purple,

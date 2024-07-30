@@ -1,3 +1,5 @@
+import 'package:slice_ui_chatapp_figma/state_util.dart';
+import 'package:slice_ui_chatapp_figma/core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Demo',
+        navigatorKey: Get.navigatorKey,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),

@@ -20,10 +20,10 @@ class SplashScreen extends StatelessWidget {
                 height: 16.0,
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 68,
+                padding: const EdgeInsets.symmetric(
+                 horizontal: 120,vertical: 60,
                 ),
-                child: Text("Get Closer To EveryOne",
+                child: Text("Finance",
                     style: TextStyle(
                       fontFamily: GoogleFonts.poppins().fontFamily,
                       fontSize: 36,
@@ -35,11 +35,11 @@ class SplashScreen extends StatelessWidget {
                 height: 8.0,
               ),
               const Padding(
-                padding: EdgeInsets.only(left: 36),
+                padding: EdgeInsets.only(left: 36, right: 36),
                 child: SizedBox(
                   width: 280,
                   child: Text(
-                    "Helps you to contact everyone with just easy way",
+                    "An app for learning finance and investments through community and resources.",
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       // fontFamily: ,
