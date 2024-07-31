@@ -5,6 +5,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 
 import 'home_page_tab_holder.dart';
 import 'educationtab.dart'; // Import the EducationTab widget
+import 'profilepage.dart'; // Import the ProfilePage widget
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,15 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> screens = [
     const HomePageTabHolder(),
     const EducationTab(), // Add the EducationTab widget here
-    const Center(
-      child: Text(
-        "Profile Page",
-        style: TextStyle(
-          fontSize: 24.0,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
+    ProfilePage(), // Add the ProfilePage widget here
   ];
 
   int sIndex = 0;

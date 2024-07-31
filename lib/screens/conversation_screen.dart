@@ -24,6 +24,52 @@ class _ConversationScreenState extends State<ConversationScreen> {
   List<List<dynamic>> _chatList = []; // Local copy of chat list
   TextEditingController _messageController = TextEditingController(); // Controller for the message input
 
+  final List<String> _flaggedKeywords = [
+  "scam",
+  "fraud",
+  "fake",
+  "spam",
+  "phishing",
+  "Ponzi",
+  "malware",
+  "virus",
+  "hack",
+  "risk",
+  "loss",
+  "collapse",
+  "crash",
+  "bubble",
+  "illegal",
+  "warning",
+  "alert",
+  "danger",
+  "compromise",
+  "exploit",
+  "vulnerability",
+  "unauthorized",
+  "misleading",
+  "deceptive",
+  "false",
+  "embezzlement",
+  "money laundering",
+  "insider trading",
+  "pump and dump",
+  "get rich quick",
+  "pyramid scheme",
+  "investment opportunity",
+  "exclusive offer",
+  "free money",
+  "limited time",
+  "act now",
+  "secret method",
+  "no risk",
+  "guaranteed returns",
+  "click here",
+  "sign up now",
+  "buy now",
+  "limited offer"
+];// Keywords to flag
+
   @override
   void initState() {
     super.initState();
@@ -46,8 +92,9 @@ class _ConversationScreenState extends State<ConversationScreen> {
 
   void _sendMessage() {
     if (_messageController.text.isNotEmpty) {
+      bool isFlagged = _flaggedKeywords.any((keyword) => _messageController.text.contains(keyword));
       setState(() {
-        _chatList.add(['Me', _messageController.text, true]); // Add new message to chat list
+        _chatList.add(['Me', _messageController.text, true, isFlagged]); // Add new message to chat list
         _messageController.clear(); // Clear the input field
       });
     }
@@ -117,10 +164,14 @@ class _ConversationScreenState extends State<ConversationScreen> {
                                   chat[0], // Display user's name
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: chat[2] ? Colors.blue : Colors.black,
+                                    color: chat[2] ? Colors.black : Colors.black,
                                   ),
                                 ),
-                                MyChatBubble(text: chat[1], isSender: chat[2]),
+                                MyChatBubble(
+                                  text: chat[1],
+                                  isSender: chat[2],
+                                  isFlagged: chat.length > 3 ? chat[3] : false, // Pass the flagged status
+                                ),
                               ],
                             ),
                           );
