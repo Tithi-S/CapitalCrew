@@ -27,7 +27,7 @@ class SplashScreen extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: GoogleFonts.poppins().fontFamily,
                       fontSize: 36,
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w900,
                       wordSpacing: 1.2,
                     )),
               ),
@@ -35,7 +35,7 @@ class SplashScreen extends StatelessWidget {
                 height: 8.0,
               ),
               const Padding(
-                padding: EdgeInsets.only(left: 36, right: 36),
+                padding: EdgeInsets.only(left: 54, right: 36),
                 child: SizedBox(
                   width: 280,
                   child: Text(
@@ -43,7 +43,7 @@ class SplashScreen extends StatelessWidget {
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       // fontFamily: ,
-                      fontSize: 18.0,
+                      fontSize: 16.0,
                     ),
                   ),
                 ),

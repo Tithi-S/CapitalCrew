@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-
 import 'package:slice_ui_chatapp_figma/widgets/bubbles_chat.dart';
+import 'polling.dart'; // Import the PollCreationWidget
 
 class ConversationScreen extends StatefulWidget {
   const ConversationScreen({
@@ -11,7 +11,7 @@ class ConversationScreen extends StatefulWidget {
   }) : super(key: key);
 
   final String contactName;
-  final List chatList;
+  final List<List<dynamic>> chatList;
 
   @override
   _ConversationScreenState createState() => _ConversationScreenState();
@@ -19,27 +19,38 @@ class ConversationScreen extends StatefulWidget {
 
 class _ConversationScreenState extends State<ConversationScreen> {
   bool isExpanded = false;
+  List<Map<String, dynamic>> _polls = []; // List to store polls
+  String? _selectedOption; // Store selected option
+  List<List<dynamic>> _chatList = []; // Local copy of chat list
+  TextEditingController _messageController = TextEditingController(); // Controller for the message input
+
+  @override
+  void initState() {
+    super.initState();
+    _chatList = widget.chatList; // Initialize local chat list
+  }
 
   void _showPopupMenu() {
     showModalBottomSheet(
       context: context,
-      builder: (context) => Container(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: Icon(Icons.poll),
-              title: Text('Create Poll'),
-              onTap: () {
-                // Add your poll creation logic here
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
+      builder: (context) => PollCreationWidget(
+        onPollCreated: (question, options) {
+          setState(() {
+            _polls.add({'question': question, 'options': options});
+          });
+          Navigator.pop(context); // Only close the modal
+        },
       ),
     );
+  }
+
+  void _sendMessage() {
+    if (_messageController.text.isNotEmpty) {
+      setState(() {
+        _chatList.add(['Me', _messageController.text, true]); // Add new message to chat list
+        _messageController.clear(); // Clear the input field
+      });
+    }
   }
 
   @override
@@ -86,17 +97,81 @@ class _ConversationScreenState extends State<ConversationScreen> {
                   ),
                 ),
                 Expanded(
-                  child: ListView.separated(
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(
-                        height: 20,
-                      );
-                    },
-                    itemCount: widget.chatList.length,
-                    itemBuilder: (context, index) {
-                      var chat = widget.chatList[index];
-                      return MyChatBubble(text: chat[0], isSender: chat[1]);
-                    },
+                  child: Stack(
+                    children: [
+                      ListView.separated(
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(
+                            height: 20,
+                          );
+                        },
+                        itemCount: _chatList.length,
+                        itemBuilder: (context, index) {
+                          var chat = _chatList[index];
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Column(
+                              crossAxisAlignment: chat[2] ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  chat[0], // Display user's name
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: chat[2] ? Colors.blue : Colors.black,
+                                  ),
+                                ),
+                                MyChatBubble(text: chat[1], isSender: chat[2]),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                      if (_polls.isNotEmpty)
+                        Positioned(
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            margin: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(16.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(color: Colors.black),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: _polls.map((poll) {
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      poll['question'],
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    ...poll['options'].map<Widget>((option) {
+                                      return RadioListTile(
+                                        title: Text(option),
+                                        value: option,
+                                        groupValue: _selectedOption,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _selectedOption = value as String?;
+                                          });
+                                        },
+                                      );
+                                    }).toList(),
+                                  ],
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                 ),
               ],
@@ -173,23 +248,26 @@ class _ConversationScreenState extends State<ConversationScreen> {
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(36.0),
               topRight: Radius.circular(36.0),
+              bottomLeft: Radius.circular(36.0),
+              bottomRight: Radius.circular(36.0),
             ),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(
-                width: 12.0,
+                width: 4.0,
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.66,
+                width: MediaQuery.of(context).size.width * 0.558,
                 child: TextFormField(
+                  controller: _messageController, // Bind the controller to the TextFormField
                   cursorColor: Colors.black,
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: "Type here...",
                     hintStyle: TextStyle(
-                      color: Colors.black87,
+                      color: Color.fromARGB(221, 34, 34, 34),
                     ),
                   ),
                 ),
@@ -199,6 +277,14 @@ class _ConversationScreenState extends State<ConversationScreen> {
                 onPressed: _showPopupMenu,
                 icon: const Icon(
                   IconlyLight.moreSquare,
+                  size: 32.0,
+                ),
+              ),
+              IconButton(
+                padding: const EdgeInsets.all(0),
+                onPressed: _sendMessage,
+                icon: const Icon(
+                  Icons.send,
                   size: 32.0,
                 ),
               ),
